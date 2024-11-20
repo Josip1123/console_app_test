@@ -12,3 +12,5 @@ Console.Write("Whats your e-mail? ");
 var email = Console.ReadLine();
 Console.WriteLine("Welcome " + name + " verification email has been sent to " + email );
 
+//test test test
+
