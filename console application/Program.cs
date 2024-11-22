@@ -1,15 +1,18 @@
-﻿
+﻿List<string> items = [];
 
 
-Console.Write("Whats your name? " );
-var name = Console.ReadLine();
-if (string.IsNullOrEmpty(name))
+while (items.Count < 10) 
 {
-    Console.WriteLine("Ooops!" +
-                      "");
+      Console.WriteLine("What would you like to buy? " );
+      var shoppingItem = Console.ReadLine();
+      items.Add(shoppingItem!);
+      
+            for (var i = 0; i < items.Count; i++)
+            {
+                var item = items[i];
+                Console.WriteLine($"{i + 1}. {char.ToUpper(item[0]) + item[1..]}");
+            }
 }
-Console.Write("Whats your e-mail? ");
-var email = Console.ReadLine();
-Console.WriteLine("Welcome " + name + " verification email has been sent to " + email );
 
-// test 1
+
+Console.ReadKey();

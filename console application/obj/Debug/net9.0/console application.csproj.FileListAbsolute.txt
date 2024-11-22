@@ -12,3 +12,4 @@
 /Users/josipsmac/Desktop/EC utbildning/Csharp/console application/console application/obj/Debug/net9.0/console application.pdb
 /Users/josipsmac/Desktop/EC utbildning/Csharp/console application/console application/obj/Debug/net9.0/console application.genruntimeconfig.cache
 /Users/josipsmac/Desktop/EC utbildning/Csharp/console application/console application/obj/Debug/net9.0/ref/console application.dll
+/Users/josipsmac/Desktop/EC utbildning/Csharp/console application/console application/obj/Debug/net9.0/console application.sourcelink.json
