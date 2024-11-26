@@ -5,8 +5,16 @@ List<Todo> todos = [];
 
 var isDone = false;
 
+void AddToList(string userInput)
+{
+    Todo todo = new Todo();
+    todo.TodoItem = userInput;
+    todos.Add(todo);
+}
+
 void PrintTodoList(List<Todo> todos)
 {
+    Console.Clear();
     for (var i = 0; i < todos.Count; i++)
     {
         var item = todos[i];
@@ -19,37 +27,24 @@ while (!isDone)
     
 {
     
-    Console.WriteLine("Type in to add an item to your list, alternatively type show to print out your list");
-    Todo todo = new Todo();
-    todo.TodoItem = Console.ReadLine()!;
-    
-    
+    Console.WriteLine("Type to add an item to your list, alternatively type 'show' to print out your list");
+    var userInput = Console.ReadLine()!.Trim().ToLower();
     Console.Clear();
     
-    if (todo.TodoItem!.Trim().ToLower() == "show")
+    if (userInput == "show")
     {
         PrintTodoList(todos);
-
+        Console.WriteLine("Would you like to add more items ? Type to add. " + "To complete a task type in 'done' or 'exit' to terminate the program");
+        userInput = Console.ReadLine()!.Trim().ToLower();
         
-        Console.WriteLine("Would you like to add more items ? Type 'y' " +
-                          "to complete a task type in done or exit to exit program");
-        var addMore = Console.ReadLine();
-        if (addMore!.Trim().ToLower() == "y")
+        if (userInput == "done")
         {
-            Console.Clear();
-        }
-        else if (addMore!.Trim().ToLower() == "done")
-        {
-            Console.Clear();
             Console.WriteLine("Type the number of the item you would like to complete");
-            
-                PrintTodoList(todos);
+            PrintTodoList(todos);
             
             if (int.TryParse(Console.ReadLine(), out int indexToRemove) && indexToRemove > 0 && indexToRemove <= todos.Count)
             {
-                Console.Clear();
                 todos[indexToRemove - 1].IsFinished = true;
-                
                 PrintTodoList(todos);
             }
             else
@@ -58,15 +53,19 @@ while (!isDone)
             }
         }
         
-        else if (addMore!.Trim().ToLower() == "exit")
+        else if (userInput == "exit")
         {
             isDone = true;
+        }
+        else
+        {
+            AddToList(userInput);
         }
     }
     
     else
     { 
-        todos.Add(todo);
+        AddToList(userInput);
     }
 
 }
