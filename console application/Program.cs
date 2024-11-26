@@ -10,6 +10,7 @@ void AddToList(string userInput)
     Todo todo = new Todo();
     todo.TodoItem = userInput;
     todos.Add(todo);
+    PrintTodoList(todos);
 }
 
 void PrintTodoList(List<Todo> todos)
@@ -27,44 +28,34 @@ while (!isDone)
     
 {
     
-    Console.WriteLine("Type to add an item to your list, alternatively type 'show' to print out your list");
+    Console.WriteLine("Type to add an item to your list, type 'done' to finish a todo item or simply type 'exit' if you would like to exit the app");
     var userInput = Console.ReadLine()!.Trim().ToLower();
     Console.Clear();
     
-    if (userInput == "show")
+    if (userInput == "done")
     {
         PrintTodoList(todos);
-        Console.WriteLine("Would you like to add more items ? Type to add. " + "To complete a task type in 'done' or 'exit' to terminate the program");
+        Console.WriteLine("Type the number of the item you would like to complete");
         userInput = Console.ReadLine()!.Trim().ToLower();
         
-        if (userInput == "done")
+        if (int.TryParse(userInput, out int indexToRemove) && indexToRemove > 0 && indexToRemove <= todos.Count)
         {
-            Console.WriteLine("Type the number of the item you would like to complete");
+            todos[indexToRemove - 1].IsFinished = true;
             PrintTodoList(todos);
-            
-            if (int.TryParse(Console.ReadLine(), out int indexToRemove) && indexToRemove > 0 && indexToRemove <= todos.Count)
-            {
-                todos[indexToRemove - 1].IsFinished = true;
-                PrintTodoList(todos);
-            }
-            else
-            {
-                Console.WriteLine("Invalid input. Please enter a valid number.");
-            }
-        }
-        
-        else if (userInput == "exit")
-        {
-            isDone = true;
         }
         else
         {
-            AddToList(userInput);
+            Console.WriteLine("Invalid input. Please enter a valid number.");
         }
+       
+    } 
+    else if (userInput == "exit")
+    {
+        isDone = true;
+        
     }
-    
     else
-    { 
+    {
         AddToList(userInput);
     }
 
