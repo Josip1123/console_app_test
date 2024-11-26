@@ -7,18 +7,21 @@ var isDone = false;
 
 void AddToList(string userInput)
 {
-    Todo todo = new Todo();
-    todo.TodoItem = userInput;
+    var todo = new Todo
+    {
+        TodoItem = userInput,
+        IsFinished = false
+    };
     todos.Add(todo);
     PrintTodoList(todos);
 }
 
-void PrintTodoList(List<Todo> todos)
+void PrintTodoList(List<Todo> list)
 {
     Console.Clear();
-    for (var i = 0; i < todos.Count; i++)
+    for (var i = 0; i < list.Count; i++)
     {
-        var item = todos[i];
+        var item = list[i];
         var status = item.IsFinished ? "Completed" : "Active";
         Console.WriteLine($"{i + 1}. {char.ToUpper(item.TodoItem[0]) + item.TodoItem[1..]} ({status})");
     }
