@@ -1,9 +1,40 @@
-﻿using System.Reflection.Metadata;
-using console_application.Models;
+﻿using console_application.Models;
 
 List<Todo> todos = [];
 
 var isDone = false;
+
+
+while (!isDone)
+    
+{
+    Console.WriteLine("Type to add an item to your list, type 'done' to finish a todo item" +
+                      " or simply type 'exit' if you would like to exit the app");
+    var userInput = Console.ReadLine()!.Trim().ToLower();
+    Console.Clear();
+    
+    switch (userInput)
+    {
+        case "done":
+            CompleteTask(todos);
+            break;
+        case "exit":
+            isDone = true;
+            break;
+        case "":
+            PrintTodoList(todos);
+            Console.WriteLine("Field can't be empty");
+            break;
+        default:
+            AddToList(userInput);
+            break;
+    }
+
+}
+
+Console.WriteLine("You are done for today, press any key to exit");
+Console.ReadKey();
+
 
 void AddToList(string userInput)
 {
@@ -27,46 +58,19 @@ void PrintTodoList(List<Todo> list)
     }
 }
 
-while (!isDone)
-    
+void CompleteTask(List<Todo> list)
 {
-    
-    Console.WriteLine("Type to add an item to your list, type 'done' to finish a todo item or simply type 'exit' if you would like to exit the app");
+    PrintTodoList(list);
+    Console.WriteLine("Type the number of the item you would like to complete");
     var userInput = Console.ReadLine()!.Trim().ToLower();
-    Console.Clear();
-    
-    if (userInput == "done")
+        
+    if (int.TryParse(userInput, out var indexToRemove) && indexToRemove > 0 && indexToRemove <= todos.Count)
     {
+        todos[indexToRemove - 1].IsFinished = true;
         PrintTodoList(todos);
-        Console.WriteLine("Type the number of the item you would like to complete");
-        userInput = Console.ReadLine()!.Trim().ToLower();
-        
-        if (int.TryParse(userInput, out var indexToRemove) && indexToRemove > 0 && indexToRemove <= todos.Count)
-        {
-            todos[indexToRemove - 1].IsFinished = true;
-            PrintTodoList(todos);
-        }
-        else
-        {
-            Console.WriteLine("Invalid input. Please enter a valid number.");
-        }
-       
-    } 
-    else if (userInput == "exit")
-    {
-        isDone = true;
-        
-    }
-    else if (string.IsNullOrEmpty(userInput))
-    {
-        Console.WriteLine("field cant be empty");
     }
     else
     {
-        AddToList(userInput);
+        Console.WriteLine("Invalid input. Please enter a valid number.");
     }
-
 }
-
-Console.WriteLine("You are done for today, press any key to exit");
-Console.ReadKey();
