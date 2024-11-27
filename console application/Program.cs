@@ -57,6 +57,10 @@ while (!isDone)
         isDone = true;
         
     }
+    else if (string.IsNullOrEmpty(userInput))
+    {
+        Console.WriteLine("field cant be empty");
+    }
     else
     {
         AddToList(userInput);
