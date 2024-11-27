@@ -41,7 +41,7 @@ while (!isDone)
         Console.WriteLine("Type the number of the item you would like to complete");
         userInput = Console.ReadLine()!.Trim().ToLower();
         
-        if (int.TryParse(userInput, out int indexToRemove) && indexToRemove > 0 && indexToRemove <= todos.Count)
+        if (int.TryParse(userInput, out var indexToRemove) && indexToRemove > 0 && indexToRemove <= todos.Count)
         {
             todos[indexToRemove - 1].IsFinished = true;
             PrintTodoList(todos);
